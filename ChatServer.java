@@ -45,6 +45,7 @@ public class ChatServer {
     }
 
     public static void broadcastMessage(String message, PrintWriter sender) {
+        System.out.println("Broadcasting: " + message);
         for (PrintWriter client : clients) {
             if (client != sender) {
                 client.println(message);
