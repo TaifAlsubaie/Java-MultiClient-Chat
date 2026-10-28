@@ -3,18 +3,22 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+
 public class ChatClient {
     public static void main(String[] args) {
         String serverAddress = "localhost";
         int port = 5000;
         try (Socket socket = new Socket(serverAddress, port);
-             BufferedReader input = new BufferedReader(
-                     new InputStreamReader(socket.getInputStream()));
-             PrintWriter output = new PrintWriter(
-                     socket.getOutputStream(), true);
-             BufferedReader keyboard = new BufferedReader(
-                     new InputStreamReader(System.in))) {
+                BufferedReader input = new BufferedReader(
+                        new InputStreamReader(socket.getInputStream()));
+                PrintWriter output = new PrintWriter(
+                        socket.getOutputStream(), true);
+                BufferedReader keyboard = new BufferedReader(
+                        new InputStreamReader(System.in))) {
             System.out.println("Connected to server successfully!");
+            System.out.print("Enter your name: ");
+            String username = keyboard.readLine();
+            output.println(username);
             Thread receiver = new Thread(() -> {
                 try {
                     String message;
@@ -29,6 +33,7 @@ public class ChatClient {
             String message;
             while ((message = keyboard.readLine()) != null) {
                 output.println(message);
+                System.out.println("You: " + message);
             }
         } catch (IOException e) {
             System.out.println("Connection failed: " + e.getMessage());
