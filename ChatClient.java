@@ -51,7 +51,6 @@ class ChatClientGUI extends JFrame {
     JButton sendButton = new JButton("Send");
     PrintWriter out;
     BufferedReader in;
-
     public ChatClientGUI() {
         setTitle("Chat Client");
         setSize(450, 500);
