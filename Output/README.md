@@ -2,4 +2,4 @@
 
 Screenshots showing the Java Multi-Client Chat application running successfully.
 
-![Multi-Client Chat Output](Output/output.png)
+![Multi-Client Chat Output](output.png)
