@@ -1,5 +1,26 @@
-# Project Output
+# Java Multi-Client Chat Application
 
-Screenshots showing the Java Multi-Client Chat application running successfully.
+## Project Description
 
-![Multi-Client Chat Output](output.png)
+This project is developed for the **Distributed Systems** course.
+
+It allows multiple clients to communicate using **Java Socket Programming**.
+
+## Key Features
+
+- Socket Programming
+- Multithreading
+- Message Broadcasting
+- Java Swing GUI
+
+## Technologies Used
+
+1. Java
+2. Java Sockets
+3. Java Swing
+
+---
+
+## Project Output
+
+![Multi-Client Chat Output](Output/output.png)
