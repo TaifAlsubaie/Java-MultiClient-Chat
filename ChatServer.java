@@ -57,6 +57,7 @@ public class ChatServer {
     private static class ClientHandler implements Runnable {
         private Socket socket;
         private PrintWriter writer;
+        private String username;
 
         public ClientHandler(Socket socket) {
             this.socket = socket;
@@ -69,9 +70,18 @@ public class ChatServer {
                 addClient(writer);
 
                 BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                // Receive username from client
+                username = reader.readLine();
+
+                if (username == null || username.trim().isEmpty()) {
+                    return;
+                }
+                username = username.trim();
+                System.out.println(username + " connected.");
+
                 String message;
                 while ((message = reader.readLine()) != null) {
-                    broadcastMessage(message, writer);
+                    broadcastMessage(username + ": " + message, writer);
                 }
             } catch (IOException e) {
                 System.out.println("Client disconnected.");
