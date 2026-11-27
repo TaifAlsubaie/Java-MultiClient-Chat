@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.util.concurrent.CopyOnWriteArrayList;
 import javax.swing.*;
 import java.awt.*;
+import java.util.Locale;//+
 
 public class ChatServer {
 
@@ -97,14 +98,14 @@ public class ChatServer {
         updateClientCount();
     }
 
-    public static void broadcastMessage(String message, PrintWriter sender) {
-        showLog(message);
-        for (PrintWriter client : clients) {
-            if (client != sender) {
-                client.println(message);
-                client.flush();
-            }
-        }
+    public static void processMessage(String message, PrintWriter sender) {//++
+        String modifiedMessage = message.toUpperCase(Locale.ROOT);
+
+    showLog("Received: " + message);
+
+    sender.println(modifiedMessage);
+
+    showLog("Sent: " + modifiedMessage);
     }
 
     private static class ClientHandler implements Runnable {
@@ -133,7 +134,7 @@ public class ChatServer {
 
                 String message;
                 while ((message = reader.readLine()) != null) {
-                    broadcastMessage(username + ": " + message, writer);
+                    processMessage(message, writer);//+
                 }
             } catch (IOException e) {
                 showLog("Client error: " + e.getMessage());
